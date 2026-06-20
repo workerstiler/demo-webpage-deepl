@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Салон красоты Модная Белка в Краснодаре — стрижки, окрашивание, маникюр, макияж. Рейтинг 4.8. Запись онлайн.">
+  <title>Модная Белка — салон красоты в Краснодаре</title>
+
+  <!-- Шрифты: preconnect для ускорения загрузки -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== CSS-переменные ===== */
+    :root {
+      --pink: #F8E8E0;
+      --pink-dark: #f0d5c8;
+      --gold: #C9A96E;
+      --gold-dark: #b8944f;
+      --white: #ffffff;
+      --text: #3a3a3a;
+      --text-light: #777;
+      --shadow: 0 4px 24px rgba(0,0,0,.08);
+      --radius: 12px;
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'Montserrat', system-ui, sans-serif;
+      --header-h: 70px;
+      --transition: .3s ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-body);
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    address { font-style: normal; }
+
+    .container {
+      width: 100%;
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    /* ===== Типографика ===== */
+    h1, h2, h3 { font-family: var(--font-heading); font-weight: 600; line-height: 1.25; }
+    h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); text-align: center; margin-bottom: .5rem; }
+    .section-subtitle {
+      text-align: center;
+      color: var(--text-light);
+      margin-bottom: 2.5rem;
+      font-size: .95rem;
+    }
+    .section { padding: 4rem 0; }
+    .section--pink { background: var(--pink); }
+
+    /* ===== Кнопки ===== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      padding: .85rem 2rem;
+      border: none;
+      border-radius: 50px;
+      font-family: var(--font-body);
+      font-size: .9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .btn--gold { background: var(--gold); color: var(--white); }
+    .btn--gold:hover { background: var(--gold-dark); transform: translateY(-2px); }
+    .btn--outline {
+      background: transparent;
+      border: 2px solid var(--gold);
+      color: var(--gold);
+    }
+    .btn--outline:hover { background: var(--gold); color: var(--white); }
+    .btn--white { background: var(--white); color: var(--gold); }
+    .btn--white:hover { background: var(--pink); }
+
+    /* ===== Анимация появления при скролле ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ===== Шапка ===== */
+    .header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      height: var(--header-h);
+      background: rgba(255,255,255,.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 1px 0 rgba(0,0,0,.06);
+      transition: var(--transition);
+    }
+    .header__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: var(--header-h);
+    }
+    .logo {
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .logo span { color: var(--text); font-weight: 400; }
+
+    /* Бургер-меню */
+    .burger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      z-index: 1001;
+    }
+    .burger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text);
+      transition: var(--transition);
+    }
+    .burger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .burger.active span:nth-child(2) { opacity: 0; }
+    .burger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    .nav {
+      position: fixed;
+      inset: 0;
+      background: rgba(255,255,255,.98);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      transform: translateX(100%);
+      transition: transform .4s ease;
+      z-index: 999;
+    }
+    .nav.open { transform: translateX(0); }
+    .nav a {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      transition: color var(--transition);
+    }
+    .nav a:hover { color: var(--gold); }
+
+    /* ===== Hero ===== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--text);
+      padding-top: var(--header-h);
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 80%, rgba(201, 169, 110, 0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 70% 50% at 85% 20%, rgba(248, 232, 224, 0.9) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 40% at 60% 60%, rgba(201, 169, 110, 0.1) 0%, transparent 50%),
+        linear-gradient(160deg, var(--pink) 0%, var(--white) 45%, #fdf6f2 100%);
+    }
+    /* Точечный паттерн на фоне */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(201, 169, 110, 0.12) 1px, transparent 1px);
+      background-size: 28px 28px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    /* Декоративные элементы */
+    .hero__decor {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero__blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(50px);
+    }
+    .hero__blob--1 {
+      width: 420px; height: 420px;
+      background: rgba(201, 169, 110, 0.22);
+      top: -120px; right: -100px;
+      animation: heroFloat 8s ease-in-out infinite;
+    }
+    .hero__blob--2 {
+      width: 360px; height: 360px;
+      background: rgba(240, 213, 200, 0.55);
+      bottom: 5%; left: -120px;
+      animation: heroFloat 10s ease-in-out infinite reverse;
+    }
+    .hero__blob--3 {
+      width: 180px; height: 180px;
+      background: rgba(201, 169, 110, 0.14);
+      top: 35%; left: 12%;
+      animation: heroFloat 7s ease-in-out infinite 1s;
+    }
+    .hero__ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(201, 169, 110, 0.22);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .hero__ring--1 { width: min(520px, 90vw); height: min(520px, 90vw); }
+    .hero__ring--2 {
+      width: min(720px, 110vw); height: min(720px, 110vw);
+      border-color: rgba(201, 169, 110, 0.12);
+    }
+    .hero__sparkle {
+      position: absolute;
+      color: var(--gold);
+      opacity: 0.35;
+      font-size: 1.4rem;
+    }
+    .hero__sparkle--1 { top: 18%; right: 14%; animation: heroTwinkle 3s ease-in-out infinite; }
+    .hero__sparkle--2 { bottom: 22%; left: 10%; font-size: 1rem; animation: heroTwinkle 4s ease-in-out infinite 1s; }
+    .hero__sparkle--3 { top: 30%; left: 22%; font-size: .8rem; animation: heroTwinkle 3.5s ease-in-out infinite .5s; }
+    @keyframes heroFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-18px); }
+    }
+    @keyframes heroTwinkle {
+      0%, 100% { opacity: 0.2; transform: scale(1); }
+      50% { opacity: 0.55; transform: scale(1.15); }
+    }
+    .hero__content { position: relative; z-index: 1; padding: 2rem 1.25rem; max-width: 700px; }
+    .hero__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      background: var(--white);
+      padding: .4rem 1rem;
+      border-radius: 50px;
+      font-size: .85rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow);
+    }
+    .hero__badge svg { color: var(--gold); }
+    .hero h1 {
+      font-size: clamp(2.2rem, 7vw, 4rem);
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+    .hero h1 em { color: var(--gold); font-style: italic; }
+    .hero p {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: var(--text-light);
+      margin-bottom: 2rem;
+      font-weight: 300;
+    }
+    .hero__actions { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+    .hero__info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+      margin-top: 2.5rem;
+      font-size: .85rem;
+      opacity: .85;
+    }
+    .hero__info span { display: flex; align-items: center; gap: .4rem; color: var(--text-light); }
+
+    /* ===== Рейтинг-блок ===== */
+    .rating-block {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--white);
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin-bottom: 2rem;
+    }
+    .rating-block__score {
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .rating-block__stars { color: var(--gold); font-size: 1.1rem; letter-spacing: 2px; }
+    .rating-block__count { font-size: .85rem; color: var(--text-light); }
+
+    /* ===== О нас / преимущества ===== */
+    .about__grid {
+      display: grid;
+      gap: 2rem;
+      align-items: center;
+    }
+    .about__text p { color: var(--text-light); margin-bottom: 1rem; }
+    .advantages {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    .advantage {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      background: var(--white);
+      padding: 1.25rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .advantage__icon {
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      background: var(--pink);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+    }
+    .advantage h3 { font-size: 1rem; margin-bottom: .25rem; }
+    .advantage p { font-size: .85rem; color: var(--text-light); }
+
+    /* ===== Услуги ===== */
+    .services__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    .service-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      box-shadow: var(--shadow);
+      border: 1px solid transparent;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--gold);
+      transform: scaleY(0);
+      transition: transform var(--transition);
+    }
+    .service-card:hover { border-color: var(--pink-dark); transform: translateY(-4px); }
+    .service-card:hover::before { transform: scaleY(1); }
+    .service-card__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: .5rem;
+    }
+    .service-card h3 { font-size: 1.15rem; }
+    .service-card__price {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      color: var(--gold);
+      white-space: nowrap;
+    }
+    .service-card p { font-size: .85rem; color: var(--text-light); }
+
+    /* ===== Портфолио / карусель-рулетка ===== */
+    .portfolio__filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+    .filter-btn {
+      padding: .5rem 1.25rem;
+      border: 1px solid var(--pink-dark);
+      background: var(--white);
+      border-radius: 50px;
+      font-family: var(--font-body);
+      font-size: .8rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .filter-btn.active,
+    .filter-btn:hover { background: var(--gold); color: var(--white); border-color: var(--gold); }
+
+    .portfolio-carousel {
+      width: 100%;
+      margin: 0 auto;
+      position: relative;
+    }
+    .portfolio-carousel__arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 1px solid var(--gold);
+      background: rgba(255, 255, 255, 0.92);
+      color: var(--gold);
+      font-size: 1.4rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      line-height: 1;
+    }
+    .portfolio-carousel__arrow:hover {
+      background: var(--gold);
+      color: var(--white);
+    }
+    .portfolio-carousel__arrow--prev { left: max(0.75rem, 2vw); }
+    .portfolio-carousel__arrow--next { right: max(0.75rem, 2vw); }
+    .portfolio-carousel__viewport {
+      width: 100%;
+      overflow: hidden;
+      padding: 1rem 3.5rem 1.5rem;
+      cursor: grab;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 6%, #000 94%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0%, #000 6%, #000 94%, transparent 100%);
+    }
+    .portfolio-carousel__track {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: transform;
+    }
+    .portfolio-slide {
+      flex-shrink: 0;
+      width: 220px;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.9s ease, filter 0.9s ease, opacity 0.9s ease;
+      cursor: pointer;
+      opacity: 0.45;
+      filter: blur(5px);
+      transform: scale(0.82);
+    }
+    .portfolio-slide.near {
+      opacity: 0.7;
+      filter: blur(2.5px);
+      transform: scale(0.92);
+    }
+    .portfolio-slide.active {
+      opacity: 1;
+      filter: blur(0);
+      transform: scale(1.05);
+      z-index: 2;
+    }
+    .portfolio-slide.far {
+      opacity: 0.4;
+      filter: blur(6px);
+      transform: scale(0.78);
+    }
+    .portfolio-slide img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 10px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+      pointer-events: none;
+    }
+    .portfolio-carousel__caption {
+      text-align: center;
+      margin-top: .5rem;
+      font-size: .9rem;
+      color: var(--text-light);
+      min-height: 1.4em;
+    }
+    .portfolio-carousel__dots {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: .4rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+      padding: 6px 0 2px;
+      overflow: visible;
+    }
+    .portfolio-carousel__dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--pink-dark);
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      flex-shrink: 0;
+      transition: var(--transition);
+    }
+    .portfolio-carousel__dot.active {
+      background: var(--gold);
+      transform: scale(1.25);
+    }
+    .portfolio-slide.hidden { display: none; }
+
+    /* ===== Лайтбокс ===== */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(0,0,0,.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      padding: 1rem;
+    }
+    .lightbox.open { opacity: 1; visibility: visible; }
+    .lightbox img { max-height: 90vh; max-width: 90vw; object-fit: contain; border-radius: var(--radius); }
+    .lightbox__close {
+      position: absolute;
+      top: 1.5rem; right: 1.5rem;
+      background: none;
+      border: none;
+      color: var(--white);
+      font-size: 2rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    /* ===== Отзывы / карусель ===== */
+    .reviews__header { text-align: center; margin-bottom: 2rem; }
+    .carousel {
+      position: relative;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .carousel__viewport {
+      overflow: hidden;
+    }
+    .carousel__track {
+      display: flex;
+      transition: transform .5s ease;
+    }
+    .carousel__slide {
+      min-width: 100%;
+      padding: 0 .5rem;
+    }
+    .review-card {
+      background: var(--white);
+      padding: 2rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+    .review-card__stars { color: var(--gold); margin-bottom: 1rem; letter-spacing: 3px; }
+    .review-card p { font-style: italic; color: var(--text-light); margin-bottom: 1rem; font-size: .95rem; }
+    .review-card__author { font-weight: 600; font-size: .9rem; }
+    .carousel__nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .carousel__btn {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--gold);
+      background: var(--white);
+      color: var(--gold);
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .carousel__btn:hover { background: var(--gold); color: var(--white); }
+    .carousel__dots {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: .5rem;
+      margin-top: 1rem;
+      padding: 6px 0 2px;
+      overflow: visible;
+    }
+    .carousel__dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--pink-dark);
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      flex-shrink: 0;
+    }
+    .carousel__dot.active { background: var(--gold); transform: scale(1.25); }
+
+    /* ===== Мастер ===== */
+    .master__grid {
+      display: grid;
+      gap: 2rem;
+      align-items: center;
+    }
+    .master__photo {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    .master__photo img { width: 100%; aspect-ratio: 3/4; object-fit: cover; }
+    .master__info h3 { font-size: 1.75rem; margin-bottom: .25rem; }
+    .master__role { color: var(--gold); font-size: .9rem; margin-bottom: 1rem; }
+    .master__exp {
+      display: inline-block;
+      background: var(--pink);
+      padding: .35rem 1rem;
+      border-radius: 50px;
+      font-size: .8rem;
+      margin-bottom: 1.25rem;
+    }
+    .master__info p { color: var(--text-light); margin-bottom: 1rem; font-size: .95rem; }
+    .master__skills { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .master__skills span {
+      background: var(--white);
+      border: 1px solid var(--pink-dark);
+      padding: .3rem .85rem;
+      border-radius: 50px;
+      font-size: .75rem;
+    }
+
+    /* ===== Контакты ===== */
+    .contacts__grid {
+      display: grid;
+      gap: 2rem;
+      min-width: 0;
+    }
+    .contacts__col {
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+    }
+    .contacts__info { display: grid; gap: 1.25rem; }
+    .contact-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .contact-item__icon {
+      width: 44px; height: 44px;
+      background: var(--pink);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+    .contact-item h4 { font-family: var(--font-body); font-size: .8rem; color: var(--text-light); font-weight: 400; }
+    .contact-item p { font-weight: 500; }
+    .contact-item a:hover { color: var(--gold); }
+
+    /* Схема проезда */
+    .directions {
+      background: var(--white);
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin-top: 1.5rem;
+    }
+    .directions h4 {
+      font-family: var(--font-body);
+      font-size: .95rem;
+      margin-bottom: .75rem;
+      color: var(--gold);
+    }
+    .directions ol {
+      list-style: decimal;
+      padding-left: 1.25rem;
+      font-size: .85rem;
+      color: var(--text-light);
+    }
+    .directions ol li { margin-bottom: .4rem; }
+
+    /* Карта */
+    .map-wrap {
+      width: 100%;
+      max-width: 100%;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      height: 260px;
+      margin-top: 1.5rem;
+    }
+    .map-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    /* Форма заявки */
+    .form {
+      background: var(--white);
+      padding: 2rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      min-width: 0;
+    }
+    .form h3 { font-size: 1.35rem; margin-bottom: .5rem; text-align: left; }
+    .form > p { font-size: .85rem; color: var(--text-light); margin-bottom: 1.5rem; }
+    .form__group { margin-bottom: 1rem; }
+    .form__group label {
+      display: block;
+      font-size: .8rem;
+      margin-bottom: .35rem;
+      color: var(--text-light);
+    }
+    .form__group input {
+      width: 100%;
+      padding: .85rem 1rem;
+      border: 1px solid var(--pink-dark);
+      border-radius: 8px;
+      font-family: var(--font-body);
+      font-size: .95rem;
+      transition: border-color var(--transition);
+      background: var(--pink);
+    }
+    .form__group input:focus {
+      outline: none;
+      border-color: var(--gold);
+      background: var(--white);
+    }
+    .form__success {
+      display: none;
+      text-align: center;
+      padding: 1rem;
+      color: var(--gold);
+      font-weight: 500;
+    }
+
+    /* ===== Футер ===== */
+    .footer {
+      background: var(--text);
+      color: rgba(255,255,255,.7);
+      padding: 2.5rem 0 1.5rem;
+      text-align: center;
+    }
+    .footer__logo {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .footer__socials {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .footer__socials a,
+    .social-link {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+    .footer__socials a:hover,
+    .social-link:hover { background: var(--gold); transform: translateY(-3px); }
+    .footer__copy { font-size: .8rem; }
+
+    /* ===== Плавающие кнопки ===== */
+    .fab-whatsapp {
+      position: fixed;
+      right: 1rem;
+      bottom: 5.5rem;
+      z-index: 900;
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: #25D366;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(37,211,102,.4);
+      transition: var(--transition);
+    }
+    .fab-whatsapp:hover { transform: scale(1.1); }
+
+    .fab-call {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 900;
+      background: var(--gold);
+      color: var(--white);
+      text-align: center;
+      padding: 1rem;
+      font-weight: 600;
+      font-size: 1rem;
+      box-shadow: 0 -4px 16px rgba(0,0,0,.15);
+    }
+    .fab-call:hover { background: var(--gold-dark); }
+
+    /* ===== Модальные окна ===== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 3000;
+      background: rgba(0,0,0,.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+    .modal-overlay.open { opacity: 1; visibility: visible; }
+    .modal {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 2rem;
+      max-width: 420px;
+      width: 100%;
+      position: relative;
+      transform: scale(.9);
+      transition: transform var(--transition);
+    }
+    .modal-overlay.open .modal { transform: scale(1); }
+    .modal__close {
+      position: absolute;
+      top: .75rem; right: 1rem;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-light);
+      line-height: 1;
+    }
+    .modal__badge {
+      display: inline-block;
+      background: var(--pink);
+      color: var(--gold);
+      padding: .25rem .75rem;
+      border-radius: 50px;
+      font-size: .75rem;
+      font-weight: 600;
+      margin-bottom: .75rem;
+    }
+    .modal h3 { font-size: 1.5rem; margin-bottom: .5rem; }
+    .modal p { color: var(--text-light); font-size: .9rem; margin-bottom: 1.5rem; }
+
+    /* ===== Адаптив: планшет ===== */
+    @media (min-width: 600px) {
+      .advantages { grid-template-columns: repeat(2, 1fr); }
+      .services__grid { grid-template-columns: repeat(2, 1fr); }
+      .portfolio-slide { width: 270px; height: 360px; }
+      .portfolio-carousel__track { gap: 1.5rem; }
+    }
+
+    /* ===== Адаптив: десктоп ===== */
+    @media (min-width: 768px) {
+      .burger { display: none; }
+      .nav {
+        position: static;
+        flex-direction: row;
+        background: none;
+        transform: none;
+        gap: 1.75rem;
+      }
+      .nav a { font-family: var(--font-body); font-size: .875rem; font-weight: 500; }
+      .about__grid { grid-template-columns: 1fr 1fr; }
+      .master__grid { grid-template-columns: 1fr 1.2fr; }
+      .contacts__grid { grid-template-columns: 1fr 1fr; }
+      .map-wrap { height: 320px; }
+    }
+
+    @media (min-width: 992px) {
+      .advantages { grid-template-columns: repeat(2, 1fr); }
+      .services__grid { grid-template-columns: repeat(3, 1fr); }
+      .contacts__grid { grid-template-columns: 1fr 1fr; }
+      .portfolio-slide { width: 320px; height: 430px; }
+      .portfolio-carousel__track { gap: 2rem; }
+    }
+
+    @media (max-width: 599px) {
+      .portfolio-carousel__arrow { width: 38px; height: 38px; font-size: 1.2rem; }
+      .portfolio-carousel__viewport { padding: 1rem 2.75rem 1.5rem; }
+    }
+
+    /* ===== Мобильная кнопка «Позвонить» ===== */
+    @media (max-width: 767px) {
+      .fab-call { display: block; }
+      body { padding-bottom: 56px; }
+      .fab-whatsapp { bottom: 4.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== ШАПКА ===== -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="#" class="logo">Модная <span>Белка</span></a>
+      <nav class="nav" id="nav">
+        <a href="#about">О нас</a>
+        <a href="#services">Услуги</a>
+        <a href="#portfolio">Портфолио</a>
+        <a href="#reviews">Отзывы</a>
+        <a href="#master">Мастер</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+      <button class="burger" id="burger" aria-label="Меню">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="hero">
+      <div class="hero__decor" aria-hidden="true">
+        <span class="hero__blob hero__blob--1"></span>
+        <span class="hero__blob hero__blob--2"></span>
+        <span class="hero__blob hero__blob--3"></span>
+        <span class="hero__ring hero__ring--1"></span>
+        <span class="hero__ring hero__ring--2"></span>
+        <span class="hero__sparkle hero__sparkle--1">✦</span>
+        <span class="hero__sparkle hero__sparkle--2">✦</span>
+        <span class="hero__sparkle hero__sparkle--3">✦</span>
+      </div>
+      <div class="hero__content reveal">
+        <div class="hero__badge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          Рейтинг <strong>4.8</strong> · 127 отзывов
+        </div>
+        <h1>Модная <em>Белка</em></h1>
+        <p>Салон красоты в Краснодаре — ваш стиль, наша забота</p>
+        <div class="hero__actions">
+          <a href="#contacts" class="btn btn--gold">Записаться</a>
+          <button class="btn btn--outline" id="btnBooking">Онлайн-запись</button>
+        </div>
+        <div class="hero__info">
+          <span>📍 ул. Селезнёва, 2/3</span>
+          <span>🕐 10:00 – 20:00</span>
+          <span>📞 +7 (965) 457-30-83</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== О НАС ===== -->
+    <section class="section section--pink" id="about">
+      <div class="container">
+        <h2 class="reveal">О салоне</h2>
+        <p class="section-subtitle reveal">Премиальный уход в атмосфере уюта и комфорта</p>
+        <div class="about__grid">
+          <div class="about__text reveal">
+            <p>«Модная Белка» — это пространство, где каждая деталь продумана для вашего комфорта. Мы используем профессиональную косметику и современные техники, чтобы вы чувствовали себя неотразимо.</p>
+            <p>Наш салон расположен в центре Краснодара на ул. Селезнёва — удобная парковка и приятная атмосфера ждут вас каждый день с 10:00 до 20:00.</p>
+          </div>
+          <div class="advantages">
+            <div class="advantage reveal">
+              <div class="advantage__icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              </div>
+              <div>
+                <h3>Топ-рейтинг 4.8</h3>
+                <p>127 довольных клиентов оставили отзывы о нашей работе</p>
+              </div>
+            </div>
+            <div class="advantage reveal">
+              <div class="advantage__icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              </div>
+              <div>
+                <h3>Удобный график</h3>
+                <p>Работаем ежедневно с 10:00 до 20:00 без выходных</p>
+              </div>
+            </div>
+            <div class="advantage reveal">
+              <div class="advantage__icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </div>
+              <div>
+                <h3>Индивидуальный подход</h3>
+                <p>Подбираем образ и уход с учётом ваших пожеланий</p>
+              </div>
+            </div>
+            <div class="advantage reveal">
+              <div class="advantage__icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <div>
+                <h3>Премиум-косметика</h3>
+                <p>Только проверенные бренды и стерильные инструменты</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== УСЛУГИ ===== -->
+    <section class="section" id="services">
+      <div class="container">
+        <h2 class="reveal">Услуги и цены</h2>
+        <p class="section-subtitle reveal">Профессиональный уход по доступным ценам</p>
+        <div class="services__grid">
+          <article class="service-card reveal">
+            <div class="service-card__header">
+              <h3>Стрижка женская</h3>
+              <span class="service-card__price">2 500 ₽</span>
+            </div>
+            <p>Модельная стрижка с укладкой и консультацией стилиста</p>
+          </article>
+          <article class="service-card reveal">
+            <div class="service-card__header">
+              <h3>Окрашивание</h3>
+              <span class="service-card__price">от 5 000 ₽</span>
+            </div>
+            <p>Тонирование, мелирование, airtouch и сложное окрашивание</p>
+          </article>
+          <article class="service-card reveal">
+            <div class="service-card__header">
+              <h3>Маникюр</h3>
+              <span class="service-card__price">2 000 ₽</span>
+            </div>
+            <p>Классический, аппаратный, покрытие гель-лаком</p>
+          </article>
+          <article class="service-card reveal">
+            <div class="service-card__header">
+              <h3>Педикюр</h3>
+              <span class="service-card__price">2 500 ₽</span>
+            </div>
+            <p>Аппаратный и классический педикюр с покрытием</p>
+          </article>
+          <article class="service-card reveal">
+            <div class="service-card__header">
+              <h3>Уход за лицом</h3>
+              <span class="service-card__price">3 000 ₽</span>
+            </div>
+            <p>Чистка, пилинг, увлажняющие и anti-age процедуры</p>
+          </article>
+          <article class="service-card reveal">
+            <div class="service-card__header">
+              <h3>Макияж</h3>
+              <span class="service-card__price">2 500 ₽</span>
+            </div>
+            <p>Дневной, вечерний и свадебный макияж</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ПОРТФОЛИО ===== -->
+    <section class="section section--pink" id="portfolio">
+      <div class="container">
+        <h2 class="reveal">Портфолио</h2>
+        <p class="section-subtitle reveal">Наши лучшие работы</p>
+
+        <!-- Фильтр по категориям -->
+        <div class="portfolio__filters reveal">
+          <button class="filter-btn active" data-filter="all">Все</button>
+          <button class="filter-btn" data-filter="manicure">Маникюр</button>
+          <button class="filter-btn" data-filter="makeup">Макияж</button>
+          <button class="filter-btn" data-filter="lashes">Ресницы</button>
+        </div>
+      </div>
+
+      <!-- Полноширинная рулетка на всю ширину экрана -->
+      <div class="portfolio-carousel reveal" id="portfolioCarousel">
+        <button class="portfolio-carousel__arrow portfolio-carousel__arrow--prev" id="portfolioPrev" aria-label="Предыдущее фото">‹</button>
+        <div class="portfolio-carousel__viewport" id="portfolioViewport">
+          <div class="portfolio-carousel__track" id="portfolioTrack">
+            <div class="portfolio-slide active" data-category="manicure">
+              <img src="images/portfolio-01-manicure.png" alt="Нюдовый маникюр" loading="lazy" width="400" height="500">
+            </div>
+            <div class="portfolio-slide" data-category="makeup">
+              <img src="images/portfolio-02-makeup.png" alt="Вечерний макияж" loading="lazy" width="400" height="500">
+            </div>
+            <div class="portfolio-slide" data-category="makeup">
+              <img src="images/portfolio-03-makeup.png" alt="Дневной макияж" loading="lazy" width="400" height="500">
+            </div>
+            <div class="portfolio-slide" data-category="manicure">
+              <img src="images/portfolio-04-manicure.png" alt="Чёрный маникюр" loading="lazy" width="400" height="500">
+            </div>
+            <div class="portfolio-slide" data-category="manicure">
+              <img src="images/portfolio-05-manicure.png" alt="Бордовый маникюр" loading="lazy" width="400" height="500">
+            </div>
+            <div class="portfolio-slide" data-category="makeup">
+              <img src="images/portfolio-06-makeup.png" alt="Glam-макияж" loading="lazy" width="400" height="500">
+            </div>
+            <div class="portfolio-slide" data-category="lashes">
+              <img src="images/portfolio-07-lashes.png" alt="Ламинирование ресниц" loading="lazy" width="400" height="400">
+            </div>
+            <div class="portfolio-slide" data-category="makeup">
+              <img src="images/portfolio-08-makeup.png" alt="Образ с жемчугом" loading="lazy" width="400" height="500">
+            </div>
+            <div class="portfolio-slide" data-category="manicure">
+              <img src="images/portfolio-09-manicure.png" alt="French маникюр" loading="lazy" width="400" height="500">
+            </div>
+            <div class="portfolio-slide" data-category="manicure">
+              <img src="images/portfolio-10-manicure.png" alt="Молочный маникюр" loading="lazy" width="400" height="500">
+            </div>
+            <div class="portfolio-slide" data-category="makeup">
+              <img src="images/portfolio-11-makeup.png" alt="Вечерний образ" loading="lazy" width="400" height="500">
+            </div>
+          </div>
+        </div>
+        <button class="portfolio-carousel__arrow portfolio-carousel__arrow--next" id="portfolioNext" aria-label="Следующее фото">›</button>
+      </div>
+
+      <div class="container">
+        <p class="portfolio-carousel__caption" id="portfolioCaption">Нюдовый маникюр</p>
+        <div class="portfolio-carousel__dots" id="portfolioDots"></div>
+      </div>
+    </section>
+
+    <!-- ===== ОТЗЫВЫ ===== -->
+    <section class="section" id="reviews">
+      <div class="container">
+        <h2 class="reveal">Отзывы клиентов</h2>
+        <div class="reviews__header reveal">
+          <div class="rating-block">
+            <div>
+              <div class="rating-block__score">4.8</div>
+              <div class="rating-block__stars">★★★★★</div>
+            </div>
+            <div>
+              <div class="rating-block__count"><strong>127</strong> отзывов</div>
+              <div class="rating-block__count">на Яндекс.Картах</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Карусель отзывов -->
+        <div class="carousel reveal" id="carousel">
+          <div class="carousel__viewport">
+            <div class="carousel__track" id="carouselTrack">
+            <div class="carousel__slide">
+              <div class="review-card">
+                <div class="review-card__stars">★★★★★</div>
+                <p>«Потрясающий салон! Делала маникюр и макияж — всё на высшем уровне. Мастер внимательная, атмосфера уютная. Обязательно вернусь!»</p>
+                <div class="review-card__author">— Анна К.</div>
+              </div>
+            </div>
+            <div class="carousel__slide">
+              <div class="review-card">
+                <div class="review-card__stars">★★★★★</div>
+                <p>«Хожу сюда уже полгода. Стрижки всегда идеальные, окрашивание держится долго. Рекомендую всем подругам!»</p>
+                <div class="review-card__author">— Мария С.</div>
+              </div>
+            </div>
+            <div class="carousel__slide">
+              <div class="review-card">
+                <div class="review-card__stars">★★★★☆</div>
+                <p>«Отличный педикюр и уход за лицом. Единственное — иногда бывает очередь, но качество того стоит. Рейтинг заслуженный.»</p>
+                <div class="review-card__author">— Елена В.</div>
+              </div>
+            </div>
+            <div class="carousel__slide">
+              <div class="review-card">
+                <div class="review-card__stars">★★★★★</div>
+                <p>«Делала свадебный макияж — получилось шикарно! Фото получились как с обложки. Спасибо большое!»</p>
+                <div class="review-card__author">— Дарья М.</div>
+              </div>
+            </div>
+          </div>
+          </div>
+          <div class="carousel__nav">
+            <button class="carousel__btn" id="carouselPrev" aria-label="Предыдущий">‹</button>
+            <button class="carousel__btn" id="carouselNext" aria-label="Следующий">›</button>
+          </div>
+          <div class="carousel__dots" id="carouselDots"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== МАСТЕР ===== -->
+    <section class="section section--pink" id="master">
+      <div class="container">
+        <h2 class="reveal">Ваш мастер</h2>
+        <p class="section-subtitle reveal">Профессионал с большим опытом</p>
+        <div class="master__grid">
+          <div class="master__photo reveal">
+            <img src="images/portfolio-06-makeup.png" alt="Мастер салона Модная Белка" loading="lazy" width="400" height="533">
+          </div>
+          <div class="master__info reveal">
+            <h3>Екатерина</h3>
+            <p class="master__role">Стилист-колорист, визажист</p>
+            <span class="master__exp">Опыт более 8 лет</span>
+            <p>Екатерина — сертифицированный мастер с опытом работы в ведущих салонах Москвы и Краснодара. Специализируется на сложном окрашивании, макияже и nail-дизайне.</p>
+            <p>Постоянно повышает квалификацию на профессиональных курсах и следит за мировыми трендами beauty-индустрии.</p>
+            <div class="master__skills">
+              <span>Окрашивание</span>
+              <span>Макияж</span>
+              <span>Маникюр</span>
+              <span>Уход за лицом</span>
+              <span>Стрижки</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== КОНТАКТЫ ===== -->
+    <section class="section" id="contacts">
+      <div class="container">
+        <h2 class="reveal">Контакты</h2>
+        <p class="section-subtitle reveal">Ждём вас в салоне</p>
+        <div class="contacts__grid">
+          <div class="contacts__col">
+            <div class="contacts__info reveal">
+              <div class="contact-item">
+                <div class="contact-item__icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <div>
+                  <h4>Адрес</h4>
+                  <p>ул. Селезнёва, 2/3, Краснодар</p>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-item__icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                </div>
+                <div>
+                  <h4>Телефон</h4>
+                  <p><a href="tel:+79654573083">+7 (965) 457-30-83</a></p>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-item__icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                </div>
+                <div>
+                  <h4>Часы работы</h4>
+                  <p>Ежедневно 10:00 – 20:00</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Схема проезда -->
+            <div class="directions reveal">
+              <h4>🚗 Как добраться</h4>
+              <ol>
+                <li>От остановки «Селезнёва» идите в сторону ул. Селезнёва (~3 мин)</li>
+                <li>Дом 2/3 — вход со стороны двора, вывеска «Модная Белка»</li>
+                <li>Бесплатная парковка во дворе (въезд с ул. Селезнёва)</li>
+                <li>На такси: «ул. Селезнёва, 2/3, Краснодар»</li>
+              </ol>
+            </div>
+
+            <!-- Яндекс.Карта -->
+            <div class="map-wrap reveal">
+              <iframe
+                src="https://yandex.ru/map-widget/v1/?text=%D1%83%D0%BB.%20%D0%A1%D0%B5%D0%BB%D0%B5%D0%B7%D0%BD%D1%91%D0%B2%D0%B0%2C%202%2F3%2C%20%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D0%B4%D0%B0%D1%80&z=16&l=map&pt=38.9758%2C45.0355%2Cpm2rdm"
+                title="Салон Модная Белка на карте"
+                loading="lazy"
+                allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+
+          <!-- Форма заявки -->
+          <div class="form reveal" id="bookingForm">
+            <h3>Оставить заявку</h3>
+            <p>Мы перезвоним в течение 15 минут</p>
+            <form id="contactForm">
+              <div class="form__group">
+                <label for="name">Ваше имя</label>
+                <input type="text" id="name" name="name" placeholder="Анна" required autocomplete="name">
+              </div>
+              <div class="form__group">
+                <label for="phone">Телефон</label>
+                <input type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" required autocomplete="tel">
+              </div>
+              <button type="submit" class="btn btn--gold" style="width:100%">Отправить заявку</button>
+            </form>
+            <p class="form__success" id="formSuccess">✓ Заявка отправлена! Мы скоро свяжемся с вами.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== ФУТЕР ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__logo">Модная Белка</div>
+      <div class="footer__socials">
+        <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram" class="social-link">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </a>
+        <a href="https://wa.me/79054014422?text=%D0%9E%D0%B1%D1%80%D0%B0%D1%89%D0%B5%D0%BD%D0%B8%D0%B5+%E2%84%96B50566767+%D0%B8%D0%B7+%D0%AF%D0%BD%D0%B4%D0%B5%D0%BA%D1%81+%D0%9A%D0%B0%D1%80%D1%82%0A%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!+%D0%9C%D0%B5%D0%BD%D1%8F+%D0%B7%D0%B0%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D0%BE%D0%B2%D0%B0%D0%BB%D0%BE+%D0%B2%D0%B0%D1%88%D0%B5+%D0%BF%D1%80%D0%B5%D0%B4%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5" target="_blank" rel="noopener" aria-label="WhatsApp" class="social-link">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+        <a href="https://t.me/modnayabelka" target="_blank" rel="noopener" aria-label="Telegram" class="social-link">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        </a>
+      </div>
+      <p class="footer__copy">&copy; 2026 «Модная Белка». Салон красоты, Краснодар.</p>
+    </div>
+  </footer>
+
+  <!-- ===== ПЛАВАЮЩИЕ КНОПКИ ===== -->
+  <a href="https://wa.me/79054014422?text=%D0%9E%D0%B1%D1%80%D0%B0%D1%89%D0%B5%D0%BD%D0%B8%D0%B5+%E2%84%96B50566767+%D0%B8%D0%B7+%D0%AF%D0%BD%D0%B4%D0%B5%D0%BA%D1%81+%D0%9A%D0%B0%D1%80%D1%82%0A%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!+%D0%9C%D0%B5%D0%BD%D1%8F+%D0%B7%D0%B0%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D0%BE%D0%B2%D0%B0%D0%BB%D0%BE+%D0%B2%D0%B0%D1%88%D0%B5+%D0%BF%D1%80%D0%B5%D0%B4%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5" class="fab-whatsapp" target="_blank" rel="noopener" aria-label="Написать в WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+  <a href="tel:+79654573083" class="fab-call">📞 Позвонить: +7 (965) 457-30-83</a>
+
+  <!-- ===== ЛАЙТБОКС ===== -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox__close" id="lightboxClose" aria-label="Закрыть">&times;</button>
+    <img src="" alt="" id="lightboxImg">
+  </div>
+
+  <!-- ===== МОДАЛЬНОЕ ОКНО: АКЦИЯ ===== -->
+  <div class="modal-overlay" id="promoModal">
+    <div class="modal">
+      <button class="modal__close" id="promoClose" aria-label="Закрыть">&times;</button>
+      <span class="modal__badge">🎁 АКЦИЯ</span>
+      <h3>Скидка 15% на первый визит!</h3>
+      <p>Запишитесь сегодня и получите скидку 15% на любую услугу. Предложение действует до конца месяца.</p>
+      <a href="#contacts" class="btn btn--gold" style="width:100%" id="promoBook">Записаться со скидкой</a>
+    </div>
+  </div>
+
+  <!-- ===== МОДАЛЬНОЕ ОКНО: ОНЛАЙН-ЗАПИСЬ (заглушка) ===== -->
+  <div class="modal-overlay" id="bookingModal">
+    <div class="modal">
+      <button class="modal__close" id="bookingClose" aria-label="Закрыть">&times;</button>
+      <span class="modal__badge">📅 СКОРО</span>
+      <h3>Онлайн-запись</h3>
+      <p>Функция онлайн-записи скоро будет доступна. А пока оставьте заявку — мы перезвоним и подберём удобное время.</p>
+      <a href="#contacts" class="btn btn--gold" style="width:100%" id="bookingGoForm">Оставить заявку</a>
+    </div>
+  </div>
+
+  <!-- ===== JAVASCRIPT ===== -->
+  <script>
+    /* --- Бургер-меню --- */
+    const burger = document.getElementById('burger');
+    const nav = document.getElementById('nav');
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('active');
+      nav.classList.toggle('open');
+    });
+    nav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        burger.classList.remove('active');
+        nav.classList.remove('open');
+      });
+    });
+
+    /* --- Анимация появления при скролле (Intersection Observer) --- */
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    /* --- Портфолио: полноширинная рулетка --- */
+    const portfolioSlides = Array.from(document.querySelectorAll('.portfolio-slide'));
+    const portfolioCaption = document.getElementById('portfolioCaption');
+    const portfolioDots = document.getElementById('portfolioDots');
+    const portfolioTrack = document.getElementById('portfolioTrack');
+    const portfolioViewport = document.getElementById('portfolioViewport');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    let visibleSlides = [...portfolioSlides];
+    let portfolioIndex = 0;
+    let portfolioTimer;
+
+    function getVisibleSlides() {
+      return portfolioSlides.filter(s => !s.classList.contains('hidden'));
+    }
+
+    function updatePortfolioPosition() {
+      visibleSlides = getVisibleSlides();
+      if (!visibleSlides.length) return;
+
+      visibleSlides.forEach((slide, i) => {
+        slide.classList.remove('active', 'near', 'far');
+        const dist = Math.abs(i - portfolioIndex);
+        if (i === portfolioIndex) slide.classList.add('active');
+        else if (dist === 1) slide.classList.add('near');
+        else slide.classList.add('far');
+      });
+
+      const activeSlide = visibleSlides[portfolioIndex];
+      portfolioCaption.textContent = activeSlide.querySelector('img').alt;
+
+      requestAnimationFrame(() => {
+        const gap = parseFloat(getComputedStyle(portfolioTrack).gap) || 20;
+        let offset = 0;
+        for (let i = 0; i < portfolioIndex; i++) {
+          offset += visibleSlides[i].offsetWidth + gap;
+        }
+        offset += activeSlide.offsetWidth / 2;
+        const translateX = portfolioViewport.offsetWidth / 2 - offset;
+        portfolioTrack.style.transform = `translateX(${translateX}px)`;
+      });
+
+      portfolioDots.querySelectorAll('.portfolio-carousel__dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === portfolioIndex);
+      });
+    }
+
+    function showPortfolioSlide(index) {
+      visibleSlides = getVisibleSlides();
+      if (!visibleSlides.length) return;
+      portfolioIndex = ((index % visibleSlides.length) + visibleSlides.length) % visibleSlides.length;
+      updatePortfolioPosition();
+    }
+
+    function buildPortfolioDots() {
+      portfolioDots.innerHTML = '';
+      visibleSlides = getVisibleSlides();
+      visibleSlides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.classList.add('portfolio-carousel__dot');
+        if (i === 0) dot.classList.add('active');
+        dot.setAttribute('aria-label', `Фото ${i + 1}`);
+        dot.addEventListener('click', () => {
+          showPortfolioSlide(i);
+          resetPortfolioAutoplay();
+        });
+        portfolioDots.appendChild(dot);
+      });
+    }
+
+    function nextPortfolioSlide() {
+      showPortfolioSlide(portfolioIndex + 1);
+    }
+
+    function startPortfolioAutoplay() {
+      portfolioTimer = setInterval(nextPortfolioSlide, 5000);
+    }
+
+    function resetPortfolioAutoplay() {
+      clearInterval(portfolioTimer);
+      startPortfolioAutoplay();
+    }
+
+    buildPortfolioDots();
+    updatePortfolioPosition();
+    startPortfolioAutoplay();
+
+    portfolioViewport.addEventListener('mouseenter', () => clearInterval(portfolioTimer));
+    portfolioViewport.addEventListener('mouseleave', startPortfolioAutoplay);
+    window.addEventListener('resize', updatePortfolioPosition);
+
+    document.getElementById('portfolioPrev').addEventListener('click', () => {
+      showPortfolioSlide(portfolioIndex - 1);
+      resetPortfolioAutoplay();
+    });
+    document.getElementById('portfolioNext').addEventListener('click', () => {
+      showPortfolioSlide(portfolioIndex + 1);
+      resetPortfolioAutoplay();
+    });
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        portfolioSlides.forEach(slide => {
+          if (filter === 'all' || slide.dataset.category === filter) {
+            slide.classList.remove('hidden');
+          } else {
+            slide.classList.remove('active');
+            slide.classList.add('hidden');
+          }
+        });
+        portfolioIndex = 0;
+        buildPortfolioDots();
+        showPortfolioSlide(0);
+        resetPortfolioAutoplay();
+      });
+    });
+
+    /* --- Лайтбокс галереи --- */
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxClose = document.getElementById('lightboxClose');
+    portfolioTrack.addEventListener('click', (e) => {
+      const slide = e.target.closest('.portfolio-slide');
+      if (!slide || slide.classList.contains('hidden')) return;
+      const idx = getVisibleSlides().indexOf(slide);
+      if (idx === -1) return;
+      if (idx !== portfolioIndex) {
+        showPortfolioSlide(idx);
+        resetPortfolioAutoplay();
+        return;
+      }
+      const img = slide.querySelector('img');
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+
+    /* --- Карусель отзывов --- */
+    const track = document.getElementById('carouselTrack');
+    const slides = track.querySelectorAll('.carousel__slide');
+    const dotsContainer = document.getElementById('carouselDots');
+    let currentSlide = 0;
+    let autoplayTimer;
+
+    slides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.classList.add('carousel__dot');
+      if (i === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => goToSlide(i));
+      dotsContainer.appendChild(dot);
+    });
+    const dots = dotsContainer.querySelectorAll('.carousel__dot');
+
+    function goToSlide(index) {
+      currentSlide = (index + slides.length) % slides.length;
+      track.style.transform = `translateX(-${currentSlide * 100}%)`;
+      dots.forEach((d, i) => d.classList.toggle('active', i === currentSlide));
+    }
+    document.getElementById('carouselPrev').addEventListener('click', () => goToSlide(currentSlide - 1));
+    document.getElementById('carouselNext').addEventListener('click', () => goToSlide(currentSlide + 1));
+
+    function startAutoplay() {
+      autoplayTimer = setInterval(() => goToSlide(currentSlide + 1), 5000);
+    }
+    startAutoplay();
+    document.getElementById('carousel').addEventListener('mouseenter', () => clearInterval(autoplayTimer));
+    document.getElementById('carousel').addEventListener('mouseleave', startAutoplay);
+
+    /* --- Форма заявки --- */
+    document.getElementById('contactForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      if (!name || !phone) return;
+      document.getElementById('contactForm').style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+    });
+
+    /* --- Маска телефона (простая) --- */
+    const phoneInput = document.getElementById('phone');
+    phoneInput.addEventListener('input', (e) => {
+      let val = e.target.value.replace(/\D/g, '');
+      if (val.length > 0 && val[0] === '8') val = '7' + val.slice(1);
+      if (val.length > 0 && val[0] !== '7') val = '7' + val;
+      let formatted = '';
+      if (val.length > 0) formatted = '+7';
+      if (val.length > 1) formatted += ' (' + val.slice(1, 4);
+      if (val.length >= 4) formatted += ') ' + val.slice(4, 7);
+      if (val.length >= 7) formatted += '-' + val.slice(7, 9);
+      if (val.length >= 9) formatted += '-' + val.slice(9, 11);
+      e.target.value = formatted;
+    });
+
+    /* --- Модальные окна --- */
+    function openModal(id) {
+      document.getElementById(id).classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('promoClose').addEventListener('click', () => closeModal('promoModal'));
+    document.getElementById('bookingClose').addEventListener('click', () => closeModal('bookingModal'));
+    document.getElementById('btnBooking').addEventListener('click', () => openModal('bookingModal'));
+
+    document.getElementById('promoBook').addEventListener('click', () => closeModal('promoModal'));
+    document.getElementById('bookingGoForm').addEventListener('click', () => closeModal('bookingModal'));
+
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) closeModal(overlay.id);
+      });
+    });
+
+    /* --- Всплывающая акция (1 раз за сессию) --- */
+    if (!sessionStorage.getItem('promoShown')) {
+      setTimeout(() => {
+        openModal('promoModal');
+        sessionStorage.setItem('promoShown', '1');
+      }, 3000);
+    }
+
+    /* --- Закрытие по Escape --- */
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeLightbox();
+        document.querySelectorAll('.modal-overlay.open').forEach(m => closeModal(m.id));
+      }
+    });
+  </script>
+</body>
+</html>
